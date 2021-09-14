@@ -22,8 +22,8 @@ public class GeoIpService {
 
     public GeoIpService(@Value("${geoLite2.city.mmdb.database.location}") String geoLiteDatabaseLocation) {
         try {
-            File file = null; //new File(System.getProperty("user.home") + geoLiteDatabaseLocation);
-            file = ProjectResourceAccess.getResourceFile(geoLiteDatabaseLocation);
+            File file = new File(System.getProperty("user.home") + geoLiteDatabaseLocation);
+            //file = ProjectResourceAccess.getResourceFile(geoLiteDatabaseLocation);
             dbReader = new DatabaseReader.Builder(file).build();
         } catch (IOException e) {
             log.info(e.getMessage());
