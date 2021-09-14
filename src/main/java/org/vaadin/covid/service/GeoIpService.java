@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import org.vaadin.covid.util.ProjectResourceAccess;
 
 @Slf4j
 @Service
@@ -21,7 +22,8 @@ public class GeoIpService {
 
     public GeoIpService(@Value("${geoLite2.city.mmdb.database.location}") String geoLiteDatabaseLocation) {
         try {
-            File file = new File(System.getProperty("user.home") + geoLiteDatabaseLocation);
+            File file = null; //new File(System.getProperty("user.home") + geoLiteDatabaseLocation);
+            file = ProjectResourceAccess.getResourceFile(geoLiteDatabaseLocation);
             dbReader = new DatabaseReader.Builder(file).build();
         } catch (IOException e) {
             log.info(e.getMessage());
